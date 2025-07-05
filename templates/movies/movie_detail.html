@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Now Showing{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/movies/movie_detail.css' %}">
+<script src="{% static 'js/movies/moviereview.js' %}"></script>
+
+<div class="container">
+    <h1 class="title"><strong>{{ movie.title }}</strong></h1>
+
+    <div class="movie-details">
+        <div class="movie-image">
+            {% if movie.movie_image %}
+            <img src="{{ movie.movie_image.url }}" alt="{{ movie.title }}">
+            {% else %}
+            <img src="{% static 'image/blank_movie.jpg' %}" alt="No Image Available">
+            {% endif %}
+        </div>
+        <div class="movie-info">
+            <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+            <p><strong>Language:</strong> {{ movie.language }}</p>
+            <p><strong>Genre:</strong> {{ movie.genre }}</p>
+
+            <div class="rating-review-container">
+                <p class="rating-info"><strong>Rating:</strong> {{ rating }}/10 ({{ reviews.count }} Votes)</p>
+                <a href="{% url 'review' movie.slug %}" class="btn btn-sm review-btn">Add Review</a>
+            </div>
+
+            <p><strong>About the movie:</strong> {{ movie.synopsis }}</p>
+            <p><strong>Duration:</strong> {{ movie.duration_minutes }} minutes</p>
+            <p><strong>Status:</strong> {{ movie.status }}</p>
+            <a href="{{ movie.trailer_url }}" class="btn">Watch Trailer</a>
+            <a href="{% url 'theater_showtime' movie.slug date %}" class="btn">Book Tickets</a>
+        </div>
+    </div>
+
+    <div class="cast">
+        <div class="cast-heading">
+            <h2>Cast</h2>
+        </div>
+        <div class="cast-list">
+            {% for cast in movie.casts.all %}
+            <div class="cast-member">
+                <div class="cast-image">
+                    {% if cast.image %}
+                    <img src="{{ cast.image.url }}" alt="{{ cast.name }}">
+                    {% else %}
+                    <img src="{% static 'image/blank.jpg' %}" alt="No Image Available">
+                    {% endif %}
+                </div>
+                <div class="cast-info">
+                    <p class="cast-name">{{ cast.name }}</p>
+                    <p class="cast-role">{{ cast.role }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="review-list">
+        <h3 class="review-heading">Reviews</h3>
+        {% for review in reviews %}
+        <div class="review-item {% if forloop.counter > 1 %}d-none{% endif %}">
+            {{ review.review_text|default:"No review text provided." }}
+        </div>
+        {% endfor %}
+
+        {% if reviews|length > 1 %}
+        <button id="show-more-btn" onclick="showAllReviews()">Show All Reviews</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

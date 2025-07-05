@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/movies/movie_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Now Showing</h1>
+        <div class="movie-grid">
+            {% for movie in movies %}
+                <div class="movie-card">
+                    <a href="{% url 'movie_detail' movie.slug %}">
+                        <div class="movie-image">
+                            {% if movie.movie_image %}
+                            <img src="{{ movie.movie_image.url }}" alt="{{ movie.title }}">
+                            {% else %}
+                            <img src="{% static 'image/blank_movie.jpg' %}" alt="No Image Available">
+                            {% endif %}
+                        </div>
+                    </a>
+                    <div class="movie-info">
+                        <h2>{{ movie.title }}</h2>
+                        <p>Release Date: {{ movie.release_date }}</p>
+                        <p>Language: {{ movie.language }}</p>
+                        <p>Genre: {{ movie.genre }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>  
+</body>
+</html>
+{% endblock %}

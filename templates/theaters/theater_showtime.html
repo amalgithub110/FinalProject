@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/theaters/showtime.css' %}">
+
+<div class="showtime-container">
+    {% if theater_showtimes %}
+        <h2 class="movie-title">{{ movie.title }}</h2>
+            <div class="dates">
+            {% for date in dates %}
+                <a href="{% url 'theater_showtime' slug date %}" class="{% if date == current_date %}active-date{% endif %}">
+                    {{ date|date:"D"|upper }}<br>{{ date|date:"d" }}<br>{{ date|date:"M"|upper }}
+                </a>
+            {% endfor %}
+            </div>
+            {% for theater  in theater_showtimes %}
+            <div class="showtime-card">
+            <div class="theater-details">
+                <div>
+                    <p class="theater-name">{{ theater.0.theater }}</p>
+                    <p class="projection-info">{{theater.0.theater.address}}</p>
+                </div>
+                <div class="info-icon">
+                    <i class="fa fa-info-circle"></i> <span>INFO</span>
+                </div>
+            </div>
+
+            <div class="showtimes">
+                {% for show in theater %}
+                    <!-- <button class="showtime-btn {% if show.is_active %}active{% endif %}">
+                        {{ show.showtime|time:"h:i A" }}
+                    </button> -->
+                    <a href="{% url 'Seats' show.id %}" class="showtime-btn" style="text-decoration: none;">{{ show.showtime|time:"h:i A" }}</a>
+                {% endfor %}
+            </div> 
+            </div>
+            {% endfor %}
+    {% else %}
+        <div class="no-showtimes">
+        <div class="dates">
+            {% for date in dates %}
+                <a href="{% url 'theater_showtime' slug date %}" class="{% if date == current_date %}active-date{% endif %}">
+                    {{ date|date:"D"|upper }}<br>{{ date|date:"d" }}<br>{{ date|date:"M"|upper }}
+                </a>
+            {% endfor %}
+        </div>
+            <h1><Strong>No showtimes found.</Strong></h1>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .failure-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .failure-icon {
+        font-size: 60px;
+        color: #e74c3c;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #c0392b;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    a.button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #e74c3c;
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    a.button:hover {
+        background-color: #c0392b;
+    }
+</style>
+</head>
+<body>
+    
+
+<div class="failure-container">
+    <div class="failure-icon">❌</div>
+    <h2>Payment Failed</h2>
+    <p>Unfortunately, your payment could not be processed. Please try again.</p>
+    <a href="/payments" class="button">Try Again</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+body {
+    background: linear-gradient(120deg, #9d9b9b, #868484);
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.showtime-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #222;
+}
+
+.movie-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.showtime-card {
+    background-color: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+}
+
+
+.theater-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.theater-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+    margin: 0;
+}
+
+.projection-info {
+    font-size: 14px;
+    color: #777;
+    margin: 2px 0 0;
+}
+
+.info-icon {
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.info-icon i {
+    color: #777;
+    font-size: 16px;
+}
+
+.showtimes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    
+}
+
+.showtime-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    border: 2px solid #28a745;
+    background-color: #fff;
+    color: #333;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.showtime-btn:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.showtime-btn.active {
+    color: #dc3545;
+    font-weight: bold;
+    border-color: #dc3545;
+}
+
+.no-showtimes {
+    text-align: center;
+    padding: 30px;
+    font-size: 18px;
+    color: #999;
+}
+
+.dates {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 30px;
+    padding: 12px 10px;
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    scroll-snap-type: x mandatory;
+}
+
+.dates a {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    background-color: #f2f2f2;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 6px;
+    width: 60px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.dates a:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: scale(1.05);
+}
+
+.dates a.active-date {
+    background-color: #dc3545;
+    color: white;
+    font-weight: 600;
+    border: 2px solid #dc3545;
+}
+
+.dates::-webkit-scrollbar {
+    display: none;
+}
+.dates {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}

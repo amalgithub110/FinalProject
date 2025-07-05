@@ -1,0 +1,147 @@
+{% load static %}
+<style>
+   .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0f0e0e; /* BookMyShow red */
+  padding: 10px 20px;
+  color: #fff;
+  position: relative;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-bar input {
+  width: 300px;
+  padding: 6px 10px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+}
+
+.search-bar button {
+  padding: 6px 12px;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+.list button{
+    padding: 6px 12px;
+  border: none;
+  background: #333;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+
+}
+
+.search-bar button:hover {
+  background: #555;
+}
+.list button:hover{
+    background:#555;
+}
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+#username {
+  font-weight: bold;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  color: black;
+  min-width: 150px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.dropdown a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+}
+.list a{
+    text-decoration: none;
+    color:white;
+    /* border-radius: 2px; */
+}
+
+.dropdown a:hover {
+  background-color: #f0f0f0;
+}
+
+</style>
+
+
+
+<header class="header">
+  <div class="logo">
+    <img src="{% static 'image/img_logo.png' %}" alt="BookShow Logo" />
+  </div>
+  
+  <div class="search-bar">
+    <form method="POST" action="{% url 'search' %}" class="d-flex">
+    {% csrf_token %}
+    <input type="text" name="search_query" class="form-control me-2" placeholder="Search movie name..." required>
+    <button type="submit" class="btn btn-outline-light">Search</button>
+</form>
+
+  </div>
+  
+  <div class="user-menu">
+    
+        
+        {% if request.user.is_authenticated %}
+        <span id="username">{{request.user.username}} &#x25BC;</span>
+        <div class="dropdown" id="dropdownMenu">
+        <a href="{% url 'booked_ticktes' %}">Your Ticktes</a>
+        
+        <a href="{% url 'logout' %}">Logout</a>
+   </div>
+        {% else %}
+        <div class="list">
+        <button><a href="{% url 'login' %}">Login</a></button>
+        <button><a href="{% url 'register' %}">Register</a></button>
+        </div>
+        {% endif %}
+     
+
+
+
+    
+  </div>
+</header>
+
+ 
+
+<script>
+  const username = document.getElementById('username');
+  const dropdown = document.getElementById('dropdownMenu');
+
+  username.addEventListener('click', function() {
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  window.addEventListener('click', function(event) {
+    if (!username.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
